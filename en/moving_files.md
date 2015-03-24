@@ -4,14 +4,14 @@ The first amazing thing we will do is learn to move files using gulp.
 
 Let's make some files to move.
 
-*/styles/some_styles.css*
+*/contents/styles/some_styles.css*
 ```css
 h1 {
   color: red;
 }
 ```
 
-*/styles/more_styles.css*
+*/contents/styles/more_styles.css*
 ```css
 p {
   font-size: 30px;
@@ -39,7 +39,7 @@ var gulp = require('gulp');
 
 gulp.task('default', [], function() {
   console.log("Moving all files in styles folder");
-  gulp.src("styles/**.*")
+  gulp.src("contents/styles/**.*")
       .pipe(gulp.dest('build/styles'));
 });
 ```
@@ -56,7 +56,7 @@ If you guessed the files will be copied and moved to the `build/styles` folder, 
 
 When we run `gulp`, we should see:
 ```
-> gulp
+$ gulp
 Using gulpfile ~/YOUR_DIRECTORY/gulpfile.js
 Starting 'default'...
 Moving all files in styles folder

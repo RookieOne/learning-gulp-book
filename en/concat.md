@@ -16,21 +16,22 @@ We left our project looking like:
     some_styles.css
     more_styles.css
 /node_modules
-/styles
-  some_styles.css
-  more_styles.css
+/contents
+  /styles
+    some_styles.css
+    more_styles.css
 gulpfile.js
 package.json
 ```
 
-So we have two css files in our `styles` folder. We are going to use a gulp plugin to concat all our css files in the `styles` folder.
+Right now, we have two separate css files in our `build/styles` folder. We are going to use a gulp plugin to concat all our css files in the `styles` folder.
 
 Gulp contains some basic tasks, but the power of gulp is the customization you can bring into your build process by using plugins.
 * For a list of all the gulp plugins available, go to http://gulpjs.com/plugins/
 
 To concat the files together, we will need to install one of these plugins.
 ```
-> npm install gulp-concat --save-dev
+$ npm install gulp-concat --save-dev
 ```
 * For more information on the `gulp-concat` plugin, visit https://www.npmjs.org/package/gulp-concat/.
 
@@ -43,7 +44,7 @@ var concat = require('gulp-concat');
 
 gulp.task('default', [], function() {
   console.log("Concating and moving all the css files in styles folder");
-  gulp.src("styles/**.css")
+  gulp.src("contents/styles/**.css")
       .pipe(concat('main.css'))
       .pipe(gulp.dest('build/styles'));
 });
@@ -58,9 +59,9 @@ var concat = require('gulp-concat');
 
 We chose to label this `concat`. Obviously we could call it anything we want, but `concat` communicates what the plugin does to those reading our build script.
 
-Second, we added another step to our task. Inbetween the `src` and the `pipe(gulp.dest...)` steps, we added `pipe(concat(...))`.
+Second, we added another step to our task. In between the `src` and the `pipe(gulp.dest...)` steps, we added `pipe(concat(...))`.
 
-Gulp works by streaming files from one process to another. This allows us to build tasks out of small, simple steps.
+Gulp works by streaming files from one process to another. This allows us to create complex build tasks out of small, simple steps. Composition == winning.
 
 Now run our gulp task:
 
